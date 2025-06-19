@@ -1,0 +1,29 @@
+{  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aclaracastro/projeto-final-nodejs.git"
+  },
+  "author": "ana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aclaracastro/projeto-final-nodejs/issues"
+  },
+  "homepage": "https://github.com/aclaracastro/projeto-final-nodejs#readme",
+
+  "name": "projeto-final-nodejs",
+  "version": "1.0.0",
+  "description": "projeto final nodejs",
+  "main": "index.js",
+  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.7"
+  },
+  "devDependencies": {
+
+  }
+  
+
+}
