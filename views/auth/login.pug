@@ -1,0 +1,25 @@
+extends ../layout.pug
+
+block content
+  .container.mt-5.bg-light.text-dark.p-4.rounded.shadow
+    h1.text-center.mb-4.text-secondary Login
+    
+    .row.justify-content-center
+      .col-md-6.col-lg-4
+        form(action="/login" method="post")
+          .form-group.mb-3
+            label(for="email") Email
+            input#email.form-control(type="email" name="email" required)
+          .form-group.mb-3
+            label(for="senha") Senha
+            input#senha.form-control(type="password" name="senha" required)
+          .d-grid
+            button.btn.btn-primary(type="submit") Entrar
+
+          .d-flex.flex-column.align-items-center
+            br
+            h6.mb-3 Ainda não tem conta?
+            
+            .mb-4
+              a.btn.btn-outline-secondary(href='/cadastro') Cadastre-se aqui!
+      

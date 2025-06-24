@@ -1,0 +1,48 @@
+extends ../layout
+
+block content
+  nav.navbar.navbar-expand-lg.navbar-dark.navbar-custom
+    .container
+      h1.navbar-brand Cadastro de Produtos
+      .d-flex.align-items-center
+      .dropdown
+          button.btn.btn-outline-light.dropdown-toggle(
+            type="button"
+            id="userDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          ) ☰ Menu 
+          ul.dropdown-menu.dropdown(aria-labelledby="userDropdown")
+            li
+              a.dropdown-item(href="/home")  Página principal
+            li
+              hr.dropdown-divider
+            li 
+              a.dropdown-item(href="/produtos") Produtos Cadastrados  
+            li
+              hr.dropdown-divider
+            li
+                a.dropdown-item(href="/logout") Sair
+        
+  br
+  if error
+    .alert.alert-danger= error
+
+  .container.mt-5.bg-light.text-dark.p-4.rounded.shadow(style="padding: 50px; border-radius: 8px;max-width: 800px;")
+    .row.justify-content-center
+      .col-md-6.col-lg-4
+        form(method="POST" action="/produtos/cadastrar" enctype="multipart/form-data")
+          .mb-3
+            label.form-label Nome do Produto
+            input.form-control(type="text" name="nome" required)
+          .mb-3
+            label.form-label Preço (ex: 8.50)
+            input.form-control(type="number" name="preco" step="0.01" required)
+          .mb-3
+            label.form-label Estoque
+            input.form-control(type="number" name="estoque" required)
+          .mb-3
+            label.form-label Imagem
+            input(type="file" name="imagem" accept="image/*" required)
+          .d-grid
+            button.btn.btn-success(type="submit") Cadastrar

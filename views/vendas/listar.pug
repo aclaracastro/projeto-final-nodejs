@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+  nav.navbar.navbar-expand-lg.navbar-dark.navbar-custom
+    .container
+      h1.navbar-brand Vendas Registradas
+      .d-flex.align-items-center
+        .dropdown
+          button.btn.btn-outline-light.dropdown-toggle(
+            type="button"
+            id="userDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          ) ☰ Menu 
+          ul.dropdown-menu.dropdown(aria-labelledby="userDropdown")
+            li
+              a.dropdown-item(href="/home") Página principal
+            li
+              hr.dropdown-divider
+            li
+              a.dropdown-item(href="/vendas") Voltar a página anterior
+            li
+              hr.dropdown-divider
+            li
+               a.dropdown-item(href="/logout") Sair
+  
+  br
+  .container.mt-4
+    table.table.table-hover.table-bordered.table-striped
+      thead.table-primary
+        tr
+          th ID
+          th Vendedor
+          th Data
+          th Total
+      tbody
+        each venda in vendas
+          tr
+            td= venda.id
+            td= venda.vendedor
+            td= new Date(venda.data).toLocaleString("pt-BR")
+            td R$ #{venda.total.toFixed(2)}

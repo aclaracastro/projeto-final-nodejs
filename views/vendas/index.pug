@@ -1,0 +1,122 @@
+extends ../layout
+
+block content
+  nav.navbar.navbar-expand-lg.navbar-dark.navbar-custom
+    .container
+      h1.navbar-brand Registrar Venda
+      .d-flex.align-items-center
+        .dropdown
+          button.btn.btn-outline-light.dropdown-toggle(
+            type="button"
+            id="userDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          ) ☰ Menu 
+          ul.dropdown-menu.dropdown(aria-labelledby="userDropdown")
+            li
+              a.dropdown-item(href="/home")  Página principal
+            li
+              hr.dropdown-divider
+            li 
+              a.dropdown-item(href="/vendas/listar") Lista de vendas  
+            li
+              hr.dropdown-divider
+            li
+                a.dropdown-item(href="/logout") Sair
+        
+  br
+  .container.sales-container
+    if error
+      .alert.alert-danger= error   
+
+    form#form-venda(method="POST" action="/vendas" onsubmit="return enviarVenda()")
+      table.table.table-hover.table-striped.table-vendas
+        thead
+          tr
+            th Produto
+            th Descrição
+            th Preço
+            th Estoque
+            th Quantidade
+        tbody
+          each produto in produtos
+            tr
+              td 
+                if produto.imagem
+                  img.img-thumbnail(
+                    src=`/uploads/${produto.imagem}`,
+                    alt=produto.nome,
+                    style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;",
+                    onclick=`ampliarImagem('/uploads/${produto.imagem}')`
+                  )
+                else
+                  img.img-thumbnail(
+                    src="/images/default-product.png",
+                    alt="Sem imagem",
+                    style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;",
+                    onclick=`ampliarImagem('/images/default-product.png')`
+                  )
+              td= produto.nome
+              td R$ #{Number(produto.preco).toFixed(2)}
+              td= produto.estoque
+              td
+                input.form-control(
+                  type="number"
+                  min="0"
+                  max=produto.estoque
+                  name=`quantidade_${produto.id}`
+                  value="0"
+                  style="width: 100px"
+                )
+    
+      .container
+        .text-end   
+          button.btn.btn-outline-success.btn-lg.mt-2(type="submit" style="padding: 10px 30px; font-size: 16px;") Confirmar
+    
+    div.modal.fade(id="imagemModal" tabindex="-1" aria-hidden="true")
+      div.modal-dialog.modal-dialog-centered
+        div.modal-content
+          div.modal-body.text-center
+            img.img-fluid(id="imagemAmpliada" src="" alt="Imagem ampliada")
+          div.modal-footer
+            button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Fechar
+
+  script.
+    function enviarVenda() {
+      const rows = document.querySelectorAll('tbody tr');
+      const produtos = [];
+
+      rows.forEach(row => {
+        const input = row.querySelector('input');
+        const id = input.name.split('_')[1];
+        const quantidade = parseInt(input.value);
+        if (quantidade > 0) {
+          produtos.push({ id: id, quantidade });
+        }
+      });
+
+      if (produtos.length === 0) {
+        alert('Selecione pelo menos um produto');
+        return false;
+      }
+
+      const form = document.getElementById('form-venda');
+      const oldInput = form.querySelector('input[name="produtos"]');
+      if (oldInput) form.removeChild(oldInput);
+
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'produtos';
+      input.value = JSON.stringify(produtos);
+      form.appendChild(input);
+
+      return true;
+    }
+
+    function ampliarImagem(src) {
+      const imagemAmpliada = document.getElementById('imagemAmpliada');
+      imagemAmpliada.src = src;
+    
+      const modal = new bootstrap.Modal(document.getElementById('imagemModal'));
+      modal.show();
+    }

@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  nav.navbar.navbar-expand-lg.navbar-custom.mb-3
+    .container
+      h1.navbar-brand Página principal
+      .d-flex.align-items-center
+        .dropdown
+          button.btn.btn-outline-light.dropdown-toggle(
+            type="button"
+            id="userDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          ) Olá, #{user.nome}!
+          ul.dropdown-menu.dropdown-menu-end(aria-labelledby="userDropdown")
+            li
+              span.dropdown-item-text
+                strong Perfil: 
+                span.badge(class=user.perfil === 'admin' ? 'bg-primary' : 'bg-success')
+                  = user.perfil === 'admin' ? 'Administrador' : 'Vendedor'
+            li
+              hr.dropdown-divider
+            li
+              .dropdown-item.text-center.p-0
+                a.dropdown-item(href="/logout") Sair 
+  br
+  br
+  .container
+    ul.list-group(style="max-width: 300px;")
+      li.list-group-item
+        a(href="/vendas") Registrar Venda
+      li.list-group-item 
+        a(href="/produtos") Consultar Produtos
+      if user.perfil === 'admin'
+        li.list-group-item
+          a(href="/produtos/cadastrar") Cadastrar Novos Produtos
+        //- li.list-group-item
+        //-   a(href="/produtos/atualizar") atualizar Produtos

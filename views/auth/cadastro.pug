@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  .container.mt-5.bg-light.text-dark.p-4.rounded.shadow
+    h2.text-center.mb-4.text-secondary Cadastro
+    if error
+      .row.justify-content-center
+        .col-md-6.col-lg-4
+          .alert.alert-danger= error
+    
+    .row.justify-content-center
+      .col-md-6.col-lg-4
+        form(method="POST", action="/cadastro")
+          .mb-3
+            label.form-label(for="nome") Nome
+            input#nome.form-control(type="text", name="nome", required)
+          .mb-3
+            label.form-label(for="email") Email
+            input#email.form-control(type="email", name="email", required)
+          .mb-3
+            label.form-label(for="senha") Senha
+            input#senha.form-control(type="password", name="senha", required)
+          .mb-3
+            label.form-label(for="perfil") Perfil
+            select#perfil.form-select(name="perfil", required)
+              option(value="", selected, disabled, hidden) Selecione seu perfil...
+              option(value="vendedor") Vendedor
+              option(value="admin") Administrador
+          .d-grid
+            button.btn.btn-success(type="submit") Cadastrar
+
+          hr
+          .d-flex.flex-column.align-items-center
+            br
+            h6.mb-3 Faça seu Login aqui!
+            
+            .mb-4
+              a.btn.btn-outline-secondary(href='/login') Login!
+      

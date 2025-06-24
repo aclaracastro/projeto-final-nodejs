@@ -1,5 +1,25 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .container.mt-5.bg-light.text-dark.p-4.rounded.shadow
+    h5.text-center.mb-4.text-secondary  Bem-vindo ao Sistema de Festa Junina da Paróquia!
+    
+    .text-center.mb-4
+      h6.mb-4-font15  Faça login para entrar no sistema!
+    
+    .d-flex.flex-column.align-items-center
+      .mb-3
+        a.btn.btn-outline-dark(href='/login')  Login
+      br
+      h6.mb-3 Ainda não tem conta?
+      
+      .mb-4
+        a.btn.btn-outline-dark(href='/cadastro') Cadastre-se aqui!
+      br
+
+    if verificacao
+      p.text-success.fw-semibold.mb-4.text-center
+        | ✅ Conectado ao banco de dados.
+    else
+      p.text-danger.fw-semibold.mb-4.text-center
+        | ⛔ Erro ao conectar no banco de dados.
