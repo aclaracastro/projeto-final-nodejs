@@ -16,7 +16,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'segredo',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } 
+  cookie: { maxAge: 60 * 60 * 60 * 60 * 1000 } 
 }));
 
 const indexRouter = require('./routes/index');
