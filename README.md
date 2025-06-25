@@ -114,7 +114,7 @@ Documentação oficial e recursos utilizados no projeto:
 
 ## 💬 Contato
 **Dúvidas ou sugestões?**  
-- Me envie uma mensagem: [@aclaracastro](https://github.com/aclaracastro)  
+- Me envie uma mensagem no github: [@aclaracastro](https://github.com/aclaracastro)  
 - Pelo email: aclaracastro5@gmail.com
 - Pelo Linkedin: [@ana-clara-castro](https://www.linkedin.com/in/ana-clara-castro-/)
 
